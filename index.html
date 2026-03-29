@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Free Freshcart</title>
+    <link href="src/output.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+        integrity="sha512-2SwdPD6INVrV/lHTZbO2nodKhrnDdJK9/kg2XD1r9uGqPo1cUbujc+IYdlYdEErWNu69gVcYgdxlmVmzTWnetw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.css" />
+    <link rel="stylesheet" href="src/style.css">
+</head>
+
+<body>
+    <header>
+        <nav class="bg-[#f0f3f2] ">
+            <div class="container w-[90%] mx-auto py-2">
+                <span class="text-left text-[14px] text-[gray] ">Super Value Deals - Save more with
+                    coupons</span>
+            </div>
+        </nav>
+        <div class=" bg-white container w-[90%] mx-auto py-5">
+            <div class="flex items-center justify-between">
+                <div class="logo">
+                    <a href=""><img src="img/freshcart-logo.svg" alt=""></a>
+                </div>
+                <div class="bg-gray-200 p-2 rounded-lg flex items-center">
+                    <input id="search" type="search" placeholder="Search" class=" text-black xl:w-[500px] ">
+                    <i class="fa-solid fa-magnifying-glass text-[gray]"></i>
+
+                </div>
+
+                <div class=" hidden icons md:flex items-center gap-5 text-[20px] text-[gray]">
+                    <i class="fa-regular fa-heart"></i>
+                    <i class="fa-regular fa-user"></i>
+                    <i class="fa-solid fa-cart-shopping"></i>
+                    <i class="fa-solid fa-bars"></i>
+                </div>
+
+            </div>
+
+
+        </div>
+    </header>
+    <hr class="border-0 bg-[#eae8e8] h-[0.2px]">
+    <main>
+        <!-- Swiper -->
+        <div class="swiper mySwiper my-10 ">
+            <div class="swiper-wrapper ">
+                <div class="swiper-slide  " style="  background: url('img/slide-1.jpg') center/cover; height: 55vh;">
+                    <div class="text-left ml-5">
+                        <span class="bg-[#eab308] text-black text-[14px] font-[500] p-2 rounded-xl">Opening Sale
+                            Discount
+                            50%</span>
+                        <h1 class="text-[28px] text-[#001e2b] font-[700] leading-[1.25] w-[60%] my-3">SuperMarket
+                            For Fresh Grocery
+                        </h1>
+                        <p class="text-[gray] font-[300] w-[60%]">Introduced a new model for online grocery shopping and
+                            convenient home
+                            delivery.</p>
+                        <button class="bg-[#001e2b] text-white p-2 rounded-lg my-3"><a href="">Shop now</a></button>
+
+                    </div>
+                </div>
+                <div class="swiper-slide " style=" height: 55vh;  background: url('img/slider-2.jpg') center/cover;">
+                    <div class="text-left ml-5">
+                        <span class="bg-[#eab308] text-black text-[14px] font-[500] p-2 rounded-xl">Free Shipping -
+                            orders over
+                            $100</span>
+                        <h1 class="text-[28px] text-[#001e2b] font-[700] leading-[1.25] w-[60%] my-3">Free Shipping -
+                            orders over
+                            <span class="text-[green]">$100</span>
+                        </h1>
+                        <p class="text-[gray] font-[300] w-[60%]">Free Shipping to First-Time Customers Only, After
+                            promotions and
+                            discounts are applied.</p>
+                        <button class="bg-[#001e2b] text-white p-2 rounded-lg my-3"><a href="">Shop now</a></button>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-pagination "></div>
+            <div class="autoplay-progress">
+                <svg viewBox="0 0 48 48">
+                    <circle cx="24" cy="24" r="20"></circle>
+                </svg>
+                <span style="display: none;"></span>
+            </div>
+        </div>
+
+
+
+        <div class="container w-[90%] mx-auto">
+            <h1 class="text-[#21313c] text-[1.5rem] font-[600]">Featured Categories</h1>
+            <div id="categories" class="cards py-5 grid grid-cols-2 gap-5 lg:grid-cols-3 xl:grid-cols-5  ">
+                <button onclick="filterdata('all')"
+                    class="bg-[#089d0891] text-white text-[18px] font-[600] rounded-xl hover:scale-110 duration-300 ">All
+                    products</button>
+
+            </div>
+
+        </div>
+        <div class="container w-[90%] mx-auto">
+            <h1 class="text-[#21313c] text-[1.5rem] font-[600] py-5">Popular Products</h1>
+            <div id="products" class="flex flex-col gap-5 md:grid grid-cols-2 xl:grid-cols-5">
+
+
+            </div>
+
+        </div>
+    </main>
+    <!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@12/swiper-bundle.min.js"></script>
+
+    <!-- Initialize Swiper -->
+    <script>
+        const progressCircle = document.querySelector(".autoplay-progress svg");
+        const progressContent = document.querySelector(".autoplay-progress span");
+        var swiper = new Swiper(".mySwiper", {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false
+            },
+
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true
+            },
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev"
+            },
+            on: {
+                autoplayTimeLeft(s, time, progress) {
+                    progressCircle.style.setProperty("--progress", 1 - progress);
+                    progressContent.textContent = `${Math.ceil(time / 1000)}s`;
+                }
+            }
+        });
+    </script>
+    <script src="app.js"></script>
+
+
+
+
+</body>
+
+</html>

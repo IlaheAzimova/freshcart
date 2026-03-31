@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="src/output.css">
+</head>
+
+<body>
+    <div id="details"></div>
+    <script>
+        const base_api = 'https://69b3fd3ce224ec066bddc026.mockapi.io/f142/product'
+        const details = document.getElementById('details')
+        function createslug(title) {
+            return title
+                .toLowerCase()
+                .trim()
+                .replace(/[\w\s-]/g, '')
+                .replace(/[\s_-]+/g, '-')
+                .replace(/^-+|-+$/g, '');
+
+        }
+        function getdetail() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const bezdimslugdan = urlParams.get('s');
+            fetch(base_api)
+                .then(res => res.json())
+                .then(data => {
+                    const prdct = data.find(item => createslug(item.title) === bezdimslugdan);
+                    details.innerHTML = `
+                      <div class="border my-50 w-[90%] mx-auto border-[green] shadow-lg rounded-2xl hover:border-[red] hover:scale-105 duration-300"">
+                         <img src="${prdct.image}" alt="" class="mx-auto">
+                        <div class="flex flex-col p-3 text-center">
+                            <span class="text-[red] text-[20px] text-center ">So delicious</span>
+                           <span class="text-[gray] text-[14px] text-center ">${prdct.category}</span>
+                           <h3 class="text-black text-[18px] font-[600]">${prdct.title}</h3>
+                            <span class="text-black font-[600] text-[16px]">${prdct.price} $</span>
+                     
+
+                         </div>
+
+                      </div>
+                            `
+                })
+        }
+        getdetail()
+    </script>
+
+</body>
+
+</html>

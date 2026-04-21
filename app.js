@@ -4,17 +4,34 @@ const search = document.getElementById('search')
 const searchcontainer = document.getElementById('searchcontainer')
 const searchresult = document.getElementById('searchresult')
 let data = []
-fetch('https://69b3fd3ce224ec066bddc026.mockapi.io/f142/category')
-    .then(res => res.json())
-    .then(cat => {
-        cat.map(c => {
+
+async function getData() {
+    const response = await fetch('https://69b3fd3ce224ec066bddc026.mockapi.io/f142/category')
+    const data = await response.json();
+    setTimeout(() => {
+        data.map(item => {
             categories.innerHTML += `
-             <div onclick="filterdata('${c.name}')" class="card-dt  border border-[#ecf0ef] w-[80%] mx-auto p-5 shadow-lg rounded-xl hover:border-[green] hover:scale-110 duration-300">
-                    <img src="${c.image}" alt="">
-                    <span class="text-[gray] text-[14px] text-center ">${c.name}</span>
+             <div onclick="filterdata('${item.name}')" class="card-dt  border border-[#ecf0ef] w-[80%] mx-auto p-5 shadow-lg rounded-xl hover:border-[green] hover:scale-110 duration-300">
+                    <img src="${item.image}" alt="">
+                    <span class="text-[gray] text-[14px] text-center ">${item.name}</span>
                 </div>`
         })
     })
+}
+getData()
+
+// fetch('https://69b3fd3ce224ec066bddc026.mockapi.io/f142/category')
+//     .then(res => res.json())
+//     .then(cat => {
+//         cat.map(c => {
+//             categories.innerHTML += `
+//              <div onclick="filterdata('${c.name}')" class="card-dt  border border-[#ecf0ef] w-[80%] mx-auto p-5 shadow-lg rounded-xl hover:border-[green] hover:scale-110 duration-300">
+//                     <img src="${c.image}" alt="">
+//                     <span class="text-[gray] text-[14px] text-center ">${c.name}</span>
+//                 </div>`
+//         })
+//     })
+
 
 fetch('https://69b3fd3ce224ec066bddc026.mockapi.io/f142/product')
     .then(res => res.json())
@@ -23,22 +40,22 @@ fetch('https://69b3fd3ce224ec066bddc026.mockapi.io/f142/product')
         showdata(data)
 
     })
+function showdata(data) {
 
-// function showdata(data) {
-//     products.innerHTML = data.map(p =>
-//         `      <div class="border border-[#ecf0ef] shadow-lg rounded-2xl hover:border-[green] hover:scale-105 duration-300"">
-//                     <img src="${p.image}" alt="" class="mx-auto">
-//                     <div class="p-3 text-center">
-//                         <span class="text-[gray] text-[14px] text-center ">${p.category}</span>
-//                         <h3 class="text-black text-[18px] font-[600]">${p.title}</h3>
-//                         <span class="text-black font-[600] text-[16px]">${p.price} $</span>
+    products.innerHTML = data.map(p =>
+        `      <div class="border border-[#ecf0ef] shadow-lg rounded-2xl hover:border-[green] hover:scale-105 duration-300"">
+                    <img src="${p.image}" alt="" class="mx-auto">
+                    <div class="p-3 text-center">
+                        <span class="text-[gray] text-[14px] text-center ">${p.category}</span>
+                        <h3 class="text-black text-[18px] font-[600]">${p.title}</h3>
+                        <span class="text-black font-[600] text-[16px]">${p.price} $</span>
 
-//                     </div>
+                    </div>
 
-//                 </div>`
+                </div>`
 
-//     ).join('')
-// }
+    ).join('')
+}
 
 function filterdata(category) {
 
@@ -92,11 +109,8 @@ function createslug(title) {
         .replace(/[\s_-]+/g, '-')
         .replace(/^-+|-+$/g, '');
 
-
-
-
-
 }
+
 function getdata() {
     fetch('https://69b3fd3ce224ec066bddc026.mockapi.io/f142/product')
         .then(res => res.json())
